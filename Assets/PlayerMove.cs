@@ -8,14 +8,14 @@ public class Player_Move : MonoBehaviour
 
     void Awake()
     {
-        rb = GetComponent & lt; Rigidbody2D & gt; ();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        float inputX = Input.GetAxisRaw(&quot; Horizontal & quot;);
-        float inputY = Input.GetAxisRaw(&quot; Vertical & quot;);
-        rb.linearVelocity = new Vector2(inputX, inputY) * moveSpeed *
-        Time.deltaTime;
+        float inputX = Input.GetAxisRaw("Horizontal");
+        float inputY = Input.GetAxisRaw("Vertical");
+        rb.linearVelocity = new Vector2(inputX, inputY) * moveSpeed;
+       
     }
 }
