@@ -13,9 +13,9 @@ public class LightManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Light()
     {
-        battery -= (Time.deltaTime*(1/60f));
+        battery -= (Time.deltaTime * (1 / 60f));
         slider.value = battery;
 
         if (battery <= 0f)
@@ -27,6 +27,17 @@ public class LightManager : MonoBehaviour
         {
             light.SetActive(true);
         }
+
+    }
+
+    public void LightOff()
+    {
+        light.SetActive(false);
+
+        
+
+
+
 
     }
 }

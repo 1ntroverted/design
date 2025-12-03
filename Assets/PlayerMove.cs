@@ -4,7 +4,10 @@ using UnityEngine;
 public class Player_Move : MonoBehaviour
 {
     Rigidbody2D rb;
-    [SerializeField] float moveSpeed;
+    [HideInInspector] public float moveSpeed{ get; set;}     //실제 적용되는 값(상태에 따라 0이 들어갈수 있음)
+
+    [SerializeField] private float _playerSpeed;
+    public float playerSpeed => _playerSpeed;
 
     void Awake()
     {
