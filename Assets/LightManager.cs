@@ -34,7 +34,16 @@ public class LightManager : MonoBehaviour
     {
         light.SetActive(false);
 
-        
+
+
+
+
+
+    }
+
+    public void LightOn()
+    {
+        light.SetActive(true);
 
 
 

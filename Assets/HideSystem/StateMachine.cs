@@ -14,10 +14,9 @@ public class StateMachine
     {
         if (newState == CurrentState) return;
 
-        if (CurrentState != null)
-        {
-            CurrentState.OnExit();
-        }
+        
+        CurrentState?.OnExit();
+        
 
         CurrentState = newState;
         CurrentState.OnEnter();

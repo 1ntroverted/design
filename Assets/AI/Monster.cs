@@ -12,6 +12,8 @@ public class Monster : MonoBehaviour
     
     [SerializeField] public Transform player;
 
+    [SerializeField] HideManager hideManager;
+
     string lastState;
 
     BTNode BTree;
@@ -23,16 +25,16 @@ public class Monster : MonoBehaviour
         
 
         BTNode idleNode = new Sequence(new List<BTNode>{
-            new ConditionNode(()=> GetDistance() > distance),
+            new ConditionNode(()=> GetDistance() > distance||hideManager.stateMachine.CurrentState is Hiding),
             new ActionNode(()=> idleMotion()) 
         });
         BTNode FollowNode = new Sequence(new List<BTNode>{
-            new ConditionNode(()=> GetDistance() <= distance&&GetDistance()>killDistance),
+            new ConditionNode(()=> GetDistance() <= distance&&GetDistance()>killDistance&&hideManager.stateMachine.CurrentState is Running),
             new ActionNode(()=>TrackingPlayer())
         });
         BTNode KillNode = new Sequence(new List<BTNode>
         {
-             new ConditionNode(()=> GetDistance() <=  killDistance),
+             new ConditionNode(()=> GetDistance() <=  killDistance&&hideManager.stateMachine.CurrentState is Running),
              new ActionNode(()=>KillPlayer())
         });
 
@@ -83,8 +85,8 @@ public class Monster : MonoBehaviour
 {
     float dist = Vector2.Distance(transform.position, player.position);
 
-    if (dist <= killDistance) return "Kill";
-    if (dist <= distance) return "Follow";
+    if (dist <= killDistance&&hideManager.stateMachine.CurrentState is Running) return "Kill";
+    if (dist <= distance&&hideManager.stateMachine.CurrentState is Running) return "Follow";
     return "Idle";
 }
 

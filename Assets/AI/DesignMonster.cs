@@ -69,29 +69,33 @@ public class DesignMonster : Monster
     {
         isMoving = true;
         // 각 노드까지 프레임마다 이동
-        for (int idx = 0; idx < path.Count; idx++)
+        if (path != null)
         {
-            Vector3 target = path[idx].nodePos;
+            for (int idx = 0; idx < path.Count; idx++)
+            {
+                Vector3 target = path[idx].nodePos;
 
-            if (target.x > transform.position.x)
-            {
-                spriteRenderer.flipX = true;
-            } 
-            if (target.x < transform.position.x)
-            {
-                spriteRenderer.flipX = false;
-            } 
-            // 2D라면 z 고정(씬에 맞춰 조정)
-            target.z = transform.position.z;
+                if (target.x > transform.position.x)
+                {
+                    spriteRenderer.flipX = true;
+                }
+                if (target.x < transform.position.x)
+                {
+                    spriteRenderer.flipX = false;
+                }
+                // 2D라면 z 고정(씬에 맞춰 조정)
+                target.z = transform.position.z;
 
-            // 해당 노드에 도착할 때까지 MoveTowards
-            while ((transform.position - target).sqrMagnitude > arriveRadius * arriveRadius)
-            {
-                Vector3 next = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-                transform.position = next;
-                yield return null;
+                // 해당 노드에 도착할 때까지 MoveTowards
+                while ((transform.position - target).sqrMagnitude > arriveRadius * arriveRadius)
+                {
+                    Vector3 next = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+                    transform.position = next;
+                    yield return null;
+                }
             }
         }
+        
         isMoving = false;
         i = (i + 1) % wayPoints.Length;
     }
