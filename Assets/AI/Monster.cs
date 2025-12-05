@@ -82,12 +82,20 @@ public class Monster : MonoBehaviour
     }
 
     string GetCurrentStateName()
-{
-    float dist = Vector2.Distance(transform.position, player.position);
+    {
+        float dist = Vector2.Distance(transform.position, player.position);
 
-    if (dist <= killDistance&&hideManager.stateMachine.CurrentState is Running) return "Kill";
-    if (dist <= distance&&hideManager.stateMachine.CurrentState is Running) return "Follow";
-    return "Idle";
-}
+        if (dist <= killDistance&&hideManager.stateMachine.CurrentState is Running) return "Kill";
+        if (dist <= distance&&hideManager.stateMachine.CurrentState is Running) return "Follow";
+        return "Idle";
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, distance); // 구 형태지만 평면에서 원처럼 보임
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, killDistance);
+    }
 
 }

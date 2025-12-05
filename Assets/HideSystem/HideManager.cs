@@ -9,6 +9,7 @@ public class HideManager : MonoBehaviour
     public StateMachine stateMachine { get; private set;}
     [SerializeField] LayerMask sunbanLayer;
     [SerializeField] LightManager lightManager;
+    [SerializeField] PlayerHpController playerHpController;
     private GameObject sunban;
 
     private float hideCoolTime = 0;
@@ -37,7 +38,7 @@ public class HideManager : MonoBehaviour
             Collider2D sunbanCol = Physics2D.OverlapCircle(transform.position, 3f, sunbanLayer);
             sunban = sunbanCol?.gameObject;
 
-            if (Input.GetKeyDown(KeyCode.F) && sunban != null && hideCoolTime == 0)
+            if (Input.GetKeyDown(KeyCode.F) && sunban != null && hideCoolTime == 0&&playerHpController.PlayerHp>0)
             {
                 stateMachine.StateChange(new Hiding(ctx, sunban.transform));
                 hideCoolTime = 1f;
