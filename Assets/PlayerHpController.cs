@@ -54,6 +54,15 @@ public class PlayerHpController : MonoBehaviour
             return null;
         }
     }
-    
-    
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Capsule"))
+        {
+            RecoverHealth(2f);
+            Destroy(collision.gameObject);
+        }
+    }
+
+
 }
