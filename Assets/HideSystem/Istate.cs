@@ -6,6 +6,7 @@ public class PlayerContext
     public Player_Move move;
     public LightManager light;
     public Transform playerTransform;
+    public PlayerHpController playerHpController;
 }
 
 

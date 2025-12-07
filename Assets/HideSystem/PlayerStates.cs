@@ -43,12 +43,14 @@ public class Hiding : State
         ctx.move.moveSpeed = 0f;
         ctx.playerTransform.position = hidePos.position;
         ctx.light.LightOff();
+        ctx.playerHpController.hpDisappearSpeed*=2;
     }
 
     public override void OnExit()
     {
         ctx.playerTransform.position += new Vector3(0, -1, 0);
         Debug.Log("짜잇호!(선반 나가는 소리)");
+        ctx.playerHpController.hpDisappearSpeed/=2;
     }
 
     public override void OnUpdate()

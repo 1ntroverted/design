@@ -8,7 +8,7 @@ public class PlayerHpController : MonoBehaviour
 
     public float PlayerHp { get; private set; }
     [SerializeField] private float maxHp;
-    [SerializeField] private float hpDisappearSpeed;
+    public float hpDisappearSpeed;
 
     [SerializeField] Volume volume;
 

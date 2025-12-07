@@ -49,4 +49,13 @@ public class LightManager : MonoBehaviour
 
 
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Battery"))
+        {
+            battery += 1f;
+            Destroy(collision.gameObject);
+        }
+    }
 }

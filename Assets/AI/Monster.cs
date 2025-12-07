@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 
 public class Monster : MonoBehaviour
@@ -77,7 +78,8 @@ public class Monster : MonoBehaviour
 
     BehaviourState KillPlayer()
     {
-        Debug.Log("플레이어 살해");
+        SceneManager.LoadScene("GameOver");
+        ScoreManager.Instance.GameOver();
         return BehaviourState.Running;
     }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ItemGenerate : MonoBehaviour
 {
-    [SerializeField] private GameObject itemPrefab;
+    [SerializeField] private GameObject[] itemPrefab;
     [SerializeField] Vector2 spawnPoints;
     [SerializeField] private float spawnInterval = 5f;
     [SerializeField] private LayerMask OverLapLayer;
@@ -24,6 +24,7 @@ public class ItemGenerate : MonoBehaviour
         {
             SpawnItem();
             timer = spawnInterval;
+            spawnInterval *= 1.01f;
         }
     }
 
@@ -33,7 +34,7 @@ public class ItemGenerate : MonoBehaviour
 
         randomPos.x = Random.Range(center.x - spawnPoints.x / 2, center.x + spawnPoints.x / 2);
         randomPos.y = Random.Range(center.y - spawnPoints.y / 2, center.y + spawnPoints.y / 2);
-        GameObject item = Instantiate(itemPrefab, randomPos, Quaternion.identity);
+        GameObject item = Instantiate(itemPrefab[Random.Range(0,itemPrefab.Length)], randomPos, Quaternion.identity);
 
         bool overlap = Physics2D.OverlapCircle(item.transform.position, 1f, OverLapLayer);
 
@@ -42,7 +43,7 @@ public class ItemGenerate : MonoBehaviour
             Destroy(item);
             randomPos.x = Random.Range(center.x - spawnPoints.x / 2, center.x + spawnPoints.x / 2);
              randomPos.y = Random.Range(center.y - spawnPoints.y / 2, center.y + spawnPoints.y / 2);
-            item = Instantiate(itemPrefab, randomPos, Quaternion.identity);
+            item = Instantiate(itemPrefab[Random.Range(0,itemPrefab.Length)], randomPos, Quaternion.identity);
             overlap = Physics2D.OverlapCircle(item.transform.position, 1f, OverLapLayer);
         }
     }

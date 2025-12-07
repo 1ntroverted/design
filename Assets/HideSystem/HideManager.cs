@@ -10,6 +10,7 @@ public class HideManager : MonoBehaviour
     [SerializeField] LayerMask sunbanLayer;
     [SerializeField] LightManager lightManager;
     [SerializeField] PlayerHpController playerHpController;
+    
     private GameObject sunban;
 
     private float hideCoolTime = 0;
@@ -21,7 +22,8 @@ public class HideManager : MonoBehaviour
             spriteRenderer = GetComponent<SpriteRenderer>(),
             move = GetComponent<Player_Move>(),
             light = lightManager,
-            playerTransform = transform
+            playerTransform = transform,
+            playerHpController=playerHpController
         };
 
     }
